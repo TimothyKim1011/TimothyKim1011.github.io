@@ -11,19 +11,21 @@ function loginSubmit(event) {
   event.preventDefault();
   loginForm.classList.add(HIDDEN_CLASSNAME);
   const loginInputValue = loginInput.value;
-  localStorage.setItem("USERNAME_KEY", loginInputValue);
-  loginForm.classList.remove(HIDDEN_CLASSNAME);
-  greeting.innerText = `Hello, ${loginInputValue}`;
+  localStorage.setItem(USERNAME_KEY, loginInputValue);
+  paintGreetings(loginInputValue);
+}
+
+function paintGreetings(username) {
+  greeting.innerText = `How are you, ${username}`;
   greeting.classList.remove(HIDDEN_CLASSNAME);
 }
 
-const savedUsername = localStorage.getItem("USERNAME_KEY");
-
+const savedUsername = localStorage.getItem(USERNAME_KEY);
 if (savedUsername === null) {
   //show the form
+  loginForm.classList.remove(HIDDEN_CLASSNAME);
   loginForm.addEventListener("submit", loginSubmit);
 } else {
   // show the greetings
-  greeting.innerText = `Hello, ${savedUsername}`;
-  greeting.classList.remove(HIDDEN_CLASSNAME);
+  paintGreetings(savedUsername);
 }
