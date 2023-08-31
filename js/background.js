@@ -14,6 +14,4 @@ const chosenImages = images[Math.floor(Math.random() * images.length)];
 const pics = document.createElement("img");
 pics.src = `imgs/${chosenImages}`;
 
-console.log(pics);
-
 document.body.appendChild(pics);
