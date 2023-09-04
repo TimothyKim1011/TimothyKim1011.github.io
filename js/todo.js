@@ -4,35 +4,42 @@ const toDoList = document.getElementById("todo-list");
 
 const TODOS_KEY = "todos";
 
-function toDoDelete(event) {
-  const parentLi = event.target.parentElement;
-  parentLi.remove();
-}
-
 let toDos = [];
 
 function saveToDos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
+function deleteToDo(event) {
+  const li = event.target.parentElement;
+  li.remove();
+  toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
+  saveToDos();
+}
+
 function paintToDo(event) {
   const li = document.createElement("li");
   toDoList.appendChild(li);
+  li.id = event.id;
   const span = document.createElement("span");
   li.appendChild(span);
-  span.innerText = event;
+  span.innerText = event.Text;
   const btn = document.createElement("button");
   li.appendChild(btn);
   btn.innerText = "🌱";
-  btn.addEventListener("click", toDoDelete);
+  btn.addEventListener("click", deleteToDo);
 }
 
 function toDoSubmit(event) {
   event.preventDefault();
   const TODO_INPUT_VALUE = toDoInput.value;
   toDoInput.value = "";
-  toDos.push(TODO_INPUT_VALUE);
-  paintToDo(TODO_INPUT_VALUE);
+  const TODO_INPUT_VALUEObj = {
+    Text: TODO_INPUT_VALUE,
+    id: Date.now(),
+  };
+  toDos.push(TODO_INPUT_VALUEObj);
+  paintToDo(TODO_INPUT_VALUEObj);
   saveToDos();
 }
 
