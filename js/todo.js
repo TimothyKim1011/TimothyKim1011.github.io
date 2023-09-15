@@ -26,7 +26,10 @@ function paintToDo(event) {
   span.innerText = event.Text;
   const btn = document.createElement("button");
   li.appendChild(btn);
-  btn.innerText = "🌱";
+  btn.innerText = "❌";
+  btn.style.background = "transparent";
+  btn.style.border = "none";
+
   btn.addEventListener("click", deleteToDo);
 }
 
