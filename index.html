@@ -10,13 +10,15 @@
     <div class="contents">
       <form id="login-form" class="hidden">
         <input
+          class="login-form_input"
           required
           type="text"
-          placeholder="What is your name?"
           maxlength="15"
           minlength="2"
         />
-        <button>Log In</button>
+        <label class="login-form_label">"What is your name?"</label>
+        <span class="login-form_span"></span>
+        <button class="login-form_button">Log In</button>
       </form>
       <h2 id="clock">00:00</h2>
       <h1 id="greeting" class="hidden"></h1>
